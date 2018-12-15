@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import moment from 'moment';
 
 // Init firebase connection
 export const fire = firebase.initializeApp({
@@ -10,3 +11,11 @@ export const fire = firebase.initializeApp({
 export const db = fire.database();
 
 export const ref = db.ref('donations');
+
+export const addDonation = () => {
+  ref.push({
+    name: 'jamie',
+    amount: 200,
+    date: moment().format(),
+  });
+};

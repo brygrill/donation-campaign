@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ref } from './firebase';
+import { ref, addDonation } from './firebase';
 
 const App = () => {
   useEffect(() => {
@@ -8,7 +8,7 @@ const App = () => {
       console.log(snapshot.val());
     });
   }, []);
-  return <div>App</div>;
+  return <div>App<button onClick={addDonation}>donate</button></div>;
 };
 
 export default App;
