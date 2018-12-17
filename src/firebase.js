@@ -13,9 +13,17 @@ export const db = fire.database();
 export const ref = db.ref('donations');
 
 export const addDonation = () => {
-  ref.push({
-    name: 'jamie',
-    amount: 200,
-    date: moment().format(),
-  });
+  return ref
+    .push({
+      name: 'jamie',
+      amount: 200,
+      date: moment().format(),
+    })
+    .then(onfulfilled => {
+      console.log(onfulfilled);
+      return onfulfilled;
+    })
+    .catch(onrejected => {
+      return onrejected;
+    });
 };
