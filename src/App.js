@@ -46,7 +46,7 @@ const App = () => {
     <Wrap>
       <Container text>
         <DonationHeader />
-        <DonationProgress />
+        <DonationProgress raised={100}/>
         <DonationForm />
         <DonationList donations={session.data} />
       </Container>
