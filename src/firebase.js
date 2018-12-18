@@ -1,5 +1,9 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/database';
+import _ from 'lodash';
 import moment from 'moment';
+
+const dbRef = process.env.NODE_ENV === 'production' ? '2018' : 'testing';
 
 // Init firebase connection
 export const fire = firebase.initializeApp({
@@ -10,17 +14,16 @@ export const fire = firebase.initializeApp({
 
 export const db = fire.database();
 
-export const ref = db.ref('donations');
+export const ref = db.ref(dbRef);
 
-export const addDonation = () => {
+export const addDonation = (name, amount) => {
   return ref
     .push({
-      name: 'jamie',
-      amount: 200,
+      name,
+      amount: _.toNumber(amount),
       date: moment().format(),
     })
     .then(onfulfilled => {
-      console.log(onfulfilled);
       return onfulfilled;
     })
     .catch(onrejected => {
