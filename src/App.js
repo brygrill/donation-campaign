@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container } from 'semantic-ui-react';
+import { Container, Dimmer, Loader } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 import DonationHeader from './DonationHeader';
@@ -7,7 +7,7 @@ import DonationProgress from './DonationProgress';
 import DonationForm from './DonationForm';
 import DonationList from './DonationList';
 
-import { ref, addDonation, formatData } from './firebase';
+import { ref, fetchGoal, addDonation, formatData } from './firebase';
 
 const Wrap = styled.div`
   padding: 1rem 0;
@@ -19,6 +19,16 @@ const App = () => {
     loading: true,
     error: null,
   });
+
+  const [goal, setGoal] = useState({
+    goal: 0,
+    loading: true,
+  });
+
+  const handleGoal = async () => {
+    const goal = await fetchGoal();
+    setGoal({ loading: false, goal });
+  };
 
   const handleDonate = async (name, amount) => {
     try {
@@ -39,21 +49,30 @@ const App = () => {
         formatted: formatData(data),
       });
     });
+
+    handleGoal();
   };
 
   useEffect(() => {
     onMount();
   }, []);
 
-  if (session.loading) {
-    return <div>Loading...</div>;
+  if (goal.loading) {
+    return (
+      <Dimmer active page inverted>
+        <Loader inverted/>
+      </Dimmer>
+    );
   }
 
   return (
     <Wrap>
       <Container text>
         <DonationHeader />
-        <DonationProgress raised={session.formatted.total} />
+        <DonationProgress
+          goal={goal.goal || 750}
+          raised={session.formatted.total}
+        />
         <DonationForm
           handleSubmit={handleDonate}
           names={session.formatted.names}
