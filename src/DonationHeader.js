@@ -25,7 +25,7 @@ const Link = ({ url, content, color }) => {
 const DonationHeader = () => {
   return (
     <HeaderWrap>
-      <Header as="h1">
+      <Header as="h1" style={{ fontSize: '3rem', fontWeight: '300' }}>
         Crestview Christmas
         <Header.Subheader>2018 Donation Campaign</Header.Subheader>
       </Header>
