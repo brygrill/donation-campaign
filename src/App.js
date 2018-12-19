@@ -19,12 +19,12 @@ const App = () => {
     error: null,
   });
 
-  const handleDonate = async () => {
+  const handleDonate = async (name, amount) => {
     try {
-      const newDonation = await addDonation();
-      console.log(newDonation);
+      await addDonation(name, amount);
+      return { success: true, error: false };
     } catch (error) {
-      console.error(error);
+      return { success: false, error };
     }
   };
 
@@ -46,8 +46,8 @@ const App = () => {
     <Wrap>
       <Container text>
         <DonationHeader />
-        <DonationProgress raised={100}/>
-        <DonationForm />
+        <DonationProgress raised={100} />
+        <DonationForm handleSubmit={handleDonate} />
         <DonationList donations={session.data} />
       </Container>
     </Wrap>

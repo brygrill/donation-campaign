@@ -1,29 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Segment, Progress, Statistic } from 'semantic-ui-react';
+import styled from 'styled-components';
 
 const goal = 750;
+
+const ProgressWrap = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+`
 
 const DonationProgress = ({ raised }) => {
   return (
     <Segment padded basic textAlign="center">
-      <Statistic.Group widths={2}>
-        <Statistic>
+      <ProgressWrap>
+        <Statistic size='small'>
           <Statistic.Value>{`$${raised}`}</Statistic.Value>
           <Statistic.Label>Raised</Statistic.Label>
         </Statistic>
-        <Statistic>
+        <Statistic size='small'>
           <Statistic.Value>{`$${goal}`}</Statistic.Value>
           <Statistic.Label>Goal</Statistic.Label>
         </Statistic>
-      </Statistic.Group>
-      <Progress percent={(raised/goal)} autoSuccess indicating />
+      </ProgressWrap>
+      <Progress percent={raised / goal} autoSuccess indicating />
     </Segment>
   );
 };
 
 DonationProgress.propTypes = {
-  percent: PropTypes.number.isRequired,
+  raised: PropTypes.number.isRequired,
 };
 
 export default DonationProgress;

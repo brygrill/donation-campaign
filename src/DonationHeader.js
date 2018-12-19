@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Button, Icon, Image } from 'semantic-ui-react';
+import { Header, Button, Segment, Image } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 import aclu from './assets/ACLU.png';
@@ -25,20 +25,18 @@ const Link = ({ url, content, color }) => {
 const DonationHeader = () => {
   return (
     <HeaderWrap>
-      {' '}
       <Header as="h1">
         Crestview Christmas
         <Header.Subheader>2018 Donation Campaign</Header.Subheader>
       </Header>
       <Image size="large" src={aclu} rounded centered />
-      <p>
-        {' '}
+      <Segment raised size="big">
         This year we are donating to the{' '}
         <Link url={links.home} content="ACLU" />. After you donate, please add
         your name below so we can track our progress. Thank you and Merry
         Christmas!
-      </p>
-      <Button primary size="huge">
+      </Segment>
+      <Button primary size="big" fluid>
         <Link url={links.donate} content="DONATE" color="#fff" />
       </Button>
     </HeaderWrap>
