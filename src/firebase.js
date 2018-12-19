@@ -30,3 +30,25 @@ export const addDonation = (name, amount) => {
       return onrejected;
     });
 };
+
+export const formatData = data => {
+  const list = _.chain(data)
+    .map((v, i) => {
+      return _.assign(v, { key: i });
+    })
+    .orderBy('date', 'desc')
+    .value();
+
+  const names = _.map(list, f => {
+    return f.name;
+  });
+
+  const total = _.chain(list)
+    .map(f => {
+      return f.amount;
+    })
+    .sum()
+    .value();
+
+  return { list, names, total };
+};

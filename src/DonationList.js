@@ -3,9 +3,14 @@ import PropTypes from 'prop-types';
 
 const DonationList = ({ donations }) => {
   console.log(donations);
-  return <div>List</div>;
+  if (donations) {
+    return <div>List</div>;
+  }
+  return null;
 };
 
-DonationList.propTypes = {};
+DonationList.propTypes = {
+  donations: PropTypes.array.isRequired,
+};
 
 export default DonationList;
