@@ -5,7 +5,6 @@ import numeral from 'numeral';
 import { Segment, List, Header } from 'semantic-ui-react';
 
 const DonationList = ({ donations }) => {
-  console.log(donations);
   if (!_.isEmpty(donations)) {
     return (
       <Segment basic>

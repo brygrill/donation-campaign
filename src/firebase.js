@@ -31,6 +31,17 @@ export const addDonation = (name, amount) => {
     });
 };
 
+export const fetchGoal = () => {
+  return db.ref('goal')
+    .once('value')
+    .then(snapshot => {
+      return snapshot.val();
+    })
+    .catch(err => {
+      return err;
+    });
+};
+
 export const formatData = data => {
   const list = _.chain(data)
     .map((v, i) => {

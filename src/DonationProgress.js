@@ -6,21 +6,19 @@ import _ from 'lodash';
 
 import Success from './Success';
 
-const goal = 750;
-
 const StatWrap = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: -1rem;
 `;
 
-const DonationProgress = ({ raised }) => {
+const DonationProgress = ({ raised, goal }) => {
   const calc = _.round((raised / goal) * 100);
   const perc = calc > 100 ? 100 : calc;
   return (
     <Segment padded basic textAlign="center">
       {perc >= 100 && (
-        <div style={{ paddingBottom: '1rem' }}>
+        <div>
           <Success
             msg="We Did It!"
             gif="https://media.giphy.com/media/HhQBQurwmemRy/giphy.gif"

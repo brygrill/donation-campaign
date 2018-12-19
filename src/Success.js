@@ -8,6 +8,7 @@ const SuccessWrap = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 1rem;
 `;
 
 const Success = ({msg, gif}) => {

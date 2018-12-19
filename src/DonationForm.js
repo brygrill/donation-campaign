@@ -21,11 +21,17 @@ const DonationForm = ({ handleSubmit, names }) => {
 
   const nameErr = _.includes(names, name);
 
+  const onSuccess = success => {
+    setSuccess(success);
+    setTimeout(() => {
+      setSuccess(false);
+    }, 8000);
+  };
   const onSubmit = async e => {
     e.preventDefault();
     const { success } = await handleSubmit(name, amount);
     if (success) {
-      setSuccess(success);
+      onSuccess(success);
       setName('');
       setAmount('');
     } else {
@@ -37,16 +43,19 @@ const DonationForm = ({ handleSubmit, names }) => {
     <Segment basic padded>
       <Header>Add Your Donation</Header>
       <Form error={error} onSubmit={onSubmit}>
-        <Message
+        {success && (
+          <Success
+            msg="Ring the Bell!"
+            gif="https://media.giphy.com/media/3Z11sCBiALCEyX9YUk/giphy.gif"
+          />
+        )}
+        {/* <Message
           info
           hidden={!success}
           content={
-            <Success
-              msg="Ring the Bell!"
-              gif="https://media.giphy.com/media/3Z11sCBiALCEyX9YUk/giphy.gif"
-            />
+
           }
-        />
+        /> */}
         <Message error header="Uh oh." content="Something went wrong!" />
         <Form.Input
           label="Name"
