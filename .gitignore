@@ -2,6 +2,7 @@
 
 .env
 .log
+.firebase
 
 # dependencies
 node_modules
